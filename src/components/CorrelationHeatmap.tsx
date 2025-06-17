@@ -62,9 +62,6 @@ const CorrelationHeatmap = ({ ratingData, title }: CorrelationHeatmapProps) => {
       <Typography variant="h6" component="h2" gutterBottom>
         {title}
       </Typography>
-      <Typography variant="body2" paragraph>
-        このヒートマップは各評価カテゴリ間の相関関係を示しています。色が濃い青ほど相関が高いことを表します。
-      </Typography>
       
       <Box sx={{ 
         width: '100%', 
