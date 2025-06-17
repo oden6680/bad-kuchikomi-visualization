@@ -25,6 +25,7 @@ export interface Review {
   motivation_detail?: string;
   career_path?: string;
   career_path_detail?: string;
+  negative_score: number;
 }
 
 export interface University {

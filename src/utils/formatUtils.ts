@@ -1,5 +1,29 @@
 import type { RatingCount } from "./utils";
 
+export const getNegativeScoreColor = (
+  score: number, 
+  thresholds?: { low: number; medium: number }
+): "success" | "warning" | "error" | "default" => {
+  const lowThreshold = thresholds?.low ?? 0.3;
+  const mediumThreshold = thresholds?.medium ?? 0.6;
+  
+  if (score <= lowThreshold) return "success";
+  if (score <= mediumThreshold) return "warning";
+  return "error";
+};
+
+export const getNegativeScoreLabel = (
+  score: number, 
+  thresholds?: { low: number; medium: number }
+): string => {
+  const lowThreshold = thresholds?.low ?? 0.3;
+  const mediumThreshold = thresholds?.medium ?? 0.6;
+  
+  if (score <= lowThreshold) return "低";
+  if (score <= mediumThreshold) return "中";
+  return "高";
+};
+
 export const getRatingColor = (rating: string): "success" | "warning" | "error" | "default" => {
   switch (rating) {
     case "良い":
