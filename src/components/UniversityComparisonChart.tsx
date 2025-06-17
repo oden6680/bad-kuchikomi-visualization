@@ -176,11 +176,12 @@ const UniversityComparisonChart = ({ universities }: UniversityComparisonChartPr
                   gridTemplateColumns: { xs: "1fr", md: "repeat(2, 1fr)" },
                   gap: 3,
                   "& > .MuiPaper-root": {
-                    height: 300,
+                    height: "auto",
+                    overflow: "auto",
                   },
                 }}
               >
-                <Paper elevation={2} sx={{ p: 2 }}>
+                <Paper elevation={2} sx={{ p: 2, display: "flex", flexDirection: "column", height: "100%" }}>
                   <Typography variant="subtitle1" gutterBottom>
                     ネガティブスコアランキング
                   </Typography>
@@ -189,6 +190,7 @@ const UniversityComparisonChart = ({ universities }: UniversityComparisonChartPr
                       display: "flex",
                       flexDirection: "column",
                       gap: 1,
+                      flex: 1,
                     }}
                   >
                     {universities
@@ -205,7 +207,10 @@ const UniversityComparisonChart = ({ universities }: UniversityComparisonChartPr
                         const normalizedScore = normalizeScore(negativeScore);
 
                         return (
-                          <Box key={uni.university_name} sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
+                          <Box
+                            key={uni.university_name}
+                            sx={{ display: "flex", flexDirection: "column", gap: 0.5, height: "100%" }}
+                          >
                             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                               <Typography variant="body2" sx={{ minWidth: 20 }}>
                                 {index + 1}.
@@ -239,7 +244,7 @@ const UniversityComparisonChart = ({ universities }: UniversityComparisonChartPr
                                     color={
                                       normalizedScore >= 70 ? "error" : normalizedScore >= 40 ? "warning" : "success"
                                     }
-                                    sx={{ height: 8, borderRadius: 1 }}
+                                    sx={{ height: 12, borderRadius: 1 }}
                                   />
                                 </Box>
                               </Tooltip>
@@ -248,13 +253,13 @@ const UniversityComparisonChart = ({ universities }: UniversityComparisonChartPr
                         );
                       })}
                   </Box>
-                  <Typography variant="caption" sx={{ display: "block", mt: 1, color: "text.secondary" }}>
+                  <Typography variant="caption" sx={{ display: "block", mt: 2, mb: 0, color: "text.secondary" }}>
                     ※ ネガティブスコアは口コミ全体のネガティブな感情の強さを表します。
                     値が大きいほどネガティブな感情が強いことを示します。 スコアは0-100の範囲に正規化されています。
                   </Typography>
                 </Paper>
 
-                <Paper elevation={2} sx={{ p: 2 }}>
+                <Paper elevation={2} sx={{ p: 2, display: "flex", flexDirection: "column" }}>
                   <Typography variant="subtitle1" gutterBottom>
                     総合評価
                   </Typography>
@@ -288,7 +293,7 @@ const UniversityComparisonChart = ({ universities }: UniversityComparisonChartPr
                               {index === 0 ? " (現在)" : ""}
                             </Typography>
                           </Box>
-                          <Box sx={{ display: "flex", alignItems: "center", ml: 3 }}>
+                            <Box sx={{ display: "flex", alignItems: "center", ml: 3, mb: 1 }}>
                             <Box
                               sx={{
                                 display: "flex",
@@ -534,7 +539,10 @@ const UniversityComparisonChart = ({ universities }: UniversityComparisonChartPr
               })}
             >
               <PolarGrid />
-              <PolarAngleAxis dataKey="category" tickFormatter={(value) => shortCategoryNames[value as string] || value} />
+              <PolarAngleAxis
+                dataKey="category"
+                tickFormatter={(value) => shortCategoryNames[value as string] || value}
+              />
               <PolarRadiusAxis domain={radarDomain} />
 
               {universities.map((uni, index) => (
